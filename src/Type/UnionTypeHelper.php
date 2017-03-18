@@ -146,15 +146,4 @@ class UnionTypeHelper
 		return null;
 	}
 
-	public static function acceptsAll(Type $type, UnionType $unionType): bool
-	{
-		foreach ($unionType->getTypes() as $otherType) {
-			if (!$type->accepts($otherType)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 }

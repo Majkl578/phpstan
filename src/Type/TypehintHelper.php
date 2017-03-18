@@ -130,7 +130,7 @@ class TypehintHelper
 						$type->isNullable() || $phpDocType->isNullable()
 					);
 				}
-			} elseif ($phpDocType instanceof UnionType) {
+			} elseif ($phpDocType instanceof CompositeType) {
 				if ($phpDocType->accepts($type)) {
 					return $phpDocType;
 				}

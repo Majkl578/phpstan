@@ -64,9 +64,9 @@ trait JustNullableTypeTrait
 			return true;
 		}
 
-		if ($type instanceof UnionType && UnionTypeHelper::acceptsAll($this, $type)) {
-			return true;
-		}
+        if ($type instanceof CompositeType && CompositeTypeHelper::accepts($this, $type)) {
+            return true;
+        }
 
 		return $type instanceof MixedType;
 	}

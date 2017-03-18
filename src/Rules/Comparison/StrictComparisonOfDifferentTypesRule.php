@@ -5,10 +5,10 @@ namespace PHPStan\Rules\Comparison;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\BooleanType;
+use PHPStan\Type\CompositeType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\StaticResolvableType;
-use PHPStan\Type\UnionType;
 
 class StrictComparisonOfDifferentTypesRule implements \PHPStan\Rules\Rule
 {
@@ -41,16 +41,16 @@ class StrictComparisonOfDifferentTypesRule implements \PHPStan\Rules\Rule
 			return [];
 		}
 
-		if ($leftType instanceof UnionType || $rightType instanceof UnionType) {
-			if ($leftType instanceof UnionType) {
-				$unionType = $leftType;
-				$otherType = $rightType;
+		if ($leftType instanceof CompositeType || $rightType instanceof CompositeType) {
+			if ($leftType instanceof CompositeType) {
+				$compositeType = $leftType;
+				$otherType     = $rightType;
 			} else {
-				$unionType = $rightType;
-				$otherType = $leftType;
+				$compositeType = $rightType;
+				$otherType     = $leftType;
 			}
 
-			$isSameType = $unionType->accepts($otherType);
+			$isSameType = $compositeType->accepts($otherType);
 		} elseif ($leftType instanceof BooleanType && $rightType instanceof BooleanType) {
 			$isSameType = $leftType->accepts($rightType) || $rightType->accepts($leftType);
 		} elseif ($leftType instanceof StaticResolvableType || $rightType instanceof StaticResolvableType) {

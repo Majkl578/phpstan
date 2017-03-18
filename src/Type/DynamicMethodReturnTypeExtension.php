@@ -2,9 +2,10 @@
 
 namespace PHPStan\Type;
 
-use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\Assign;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
+use PHPStan\Reflection\PropertyReflection;
 
 interface DynamicMethodReturnTypeExtension
 {
@@ -13,6 +14,6 @@ interface DynamicMethodReturnTypeExtension
 
 	public function isMethodSupported(MethodReflection $methodReflection): bool;
 
-	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type;
+	public function getType(PropertyReflection $propertyReflection, Assign $assign, Scope $scope): Type;
 
 }

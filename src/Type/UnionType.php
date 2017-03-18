@@ -2,12 +2,6 @@
 
 namespace PHPStan\Type;
 
-interface UnionType extends StaticResolvableType
+interface UnionType extends CompositeType, StaticResolvableType
 {
-
-	/**
-	 * @return \PHPStan\Type\Type[]
-	 */
-	public function getTypes(): array;
-
 }
